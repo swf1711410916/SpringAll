@@ -2,12 +2,11 @@ package demo.springboot.test.domain;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Table(name = "T_USER")
 public class User {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "ID")
     private Long id;
