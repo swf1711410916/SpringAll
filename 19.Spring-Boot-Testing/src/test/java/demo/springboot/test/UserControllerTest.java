@@ -48,7 +48,7 @@ public class UserControllerTest {
     }
 	
 	@Test
-	@Transactional
+	@Transactional(rollbackFor = Exception.class)//测试默认事务自动回滚
 	public void test() throws Exception {
 //		mockMvc.perform(
 //				 MockMvcRequestBuilders.get("/user/{userName}", "scott")
