@@ -24,7 +24,7 @@ public class MysqlDatasourceConfig {
 	// mybatis mapper扫描路径
 	static final String MAPPER_LOCATION = "classpath:mapper/mysql/*.xml";
 
-	@Primary
+
 	@Bean(name = "mysqldatasource")
 	@ConfigurationProperties("spring.datasource.druid.mysql")
 	public DataSource mysqlDataSource() {
@@ -32,13 +32,11 @@ public class MysqlDatasourceConfig {
 	}
 
 	@Bean(name = "mysqlTransactionManager")
-	@Primary
 	public DataSourceTransactionManager mysqlTransactionManager() {
 		return new DataSourceTransactionManager(mysqlDataSource());
 	}
 
 	@Bean(name = "mysqlSqlSessionFactory")
-	@Primary
 	public SqlSessionFactory mysqlSqlSessionFactory(@Qualifier("mysqldatasource") DataSource dataSource)
 			throws Exception {
 		final SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();

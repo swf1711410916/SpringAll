@@ -24,4 +24,11 @@ public class StudentController {
 	public List<Map<String, Object>> queryStudentsFromMysql(){
 		return this.studentService.getAllStudentsFromMysql();
 	}
+
+	@RequestMapping("querystudentsfrompostgrep")
+	public List<Map<String, Object>> queryStudentsFromPostgrep(){
+		return this.studentService.getAllStudentsFromPostgrepSQL();
+	}
+
+
 }
