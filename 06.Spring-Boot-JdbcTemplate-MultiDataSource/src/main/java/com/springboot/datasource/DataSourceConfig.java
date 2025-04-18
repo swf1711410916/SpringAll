@@ -13,7 +13,13 @@ import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 
 @Configuration
 public class DataSourceConfig {
+
 	@Primary
+	@Bean(name = "pgsqlDatasource")
+	@ConfigurationProperties("spring.datasource.druid.postgresql")
+	public DataSource dataSource(){
+		return DruidDataSourceBuilder.create().build();
+	}
 	@Bean(name = "mysqldatasource")
 	@ConfigurationProperties("spring.datasource.druid.mysql")
 	public DataSource dataSourceOne(){
@@ -26,6 +32,11 @@ public class DataSourceConfig {
 	    return DruidDataSourceBuilder.create().build();
 	}
 
+	@Bean(name = "pgsqlJdbcTemplate")
+	public JdbcTemplate pgsqlJdbcTemplate(
+	        @Qualifier("pgsqlDatasource") DataSource dataSource) {
+	    return new JdbcTemplate(dataSource);
+	}
 	@Bean(name = "mysqlJdbcTemplate")
 	public JdbcTemplate primaryJdbcTemplate(
 	        @Qualifier("mysqldatasource") DataSource dataSource) {
